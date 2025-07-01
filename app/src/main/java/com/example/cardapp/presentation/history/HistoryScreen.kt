@@ -9,11 +9,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.cardapp.R
 import com.example.cardapp.domain.model.Bank
 import com.example.cardapp.domain.model.BinInfo
 import com.example.cardapp.domain.model.CardNumber
@@ -33,7 +35,7 @@ fun HistoryScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         TopAppBar(
-            title = { Text("История запросов") },
+            title = { Text(stringResource(R.string.history_title)) },
             navigationIcon = {
                 IconButton(
                     onClick = { 
@@ -44,7 +46,7 @@ fun HistoryScreen(
                     },
                     enabled = !isNavigating
                 ) {
-                    Icon(Icons.Default.ArrowBack, contentDescription = "Назад")
+                    Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.back))
                 }
             }
         )
@@ -69,12 +71,12 @@ fun HistoryScreen(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Text(
-                            text = "История пуста",
+                            text = stringResource(R.string.history_empty),
                             style = MaterialTheme.typography.titleLarge,
                             textAlign = TextAlign.Center
                         )
                         Text(
-                            text = "Выполните поиск BIN номера для добавления в историю",
+                            text = stringResource(R.string.history_empty_description),
                             style = MaterialTheme.typography.bodyMedium,
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(horizontal = 32.dp)
@@ -115,7 +117,7 @@ fun HistoryItem(binInfo: BinInfo) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "BIN: ${binInfo.bin}",
+                    text = stringResource(R.string.bin_prefix, binInfo.bin),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
@@ -145,13 +147,13 @@ fun HistoryItem(binInfo: BinInfo) {
                 Column(modifier = Modifier.weight(1f)) {
                     binInfo.brand?.let { brand ->
                         Text(
-                            text = "Бренд: $brand",
+                            text = stringResource(R.string.brand_value, brand),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }
                     binInfo.type?.let { type ->
                         Text(
-                            text = "Тип: ${type.replaceFirstChar { it.uppercase() }}",
+                            text = stringResource(R.string.type_value, type.replaceFirstChar { it.uppercase() }),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }
@@ -257,10 +259,10 @@ fun HistoryEmptyStatePreview() {
             modifier = Modifier.fillMaxSize()
         ) {
             TopAppBar(
-                title = { Text("История запросов") },
+                title = { Text(stringResource(R.string.history_title)) },
                 navigationIcon = {
                     IconButton(onClick = {}) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Назад")
+                        Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 }
             )
@@ -274,12 +276,12 @@ fun HistoryEmptyStatePreview() {
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Text(
-                        text = "История пуста",
+                        text = stringResource(R.string.history_empty),
                         style = MaterialTheme.typography.titleLarge,
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text = "Выполните поиск BIN номера для добавления в историю",
+                        text = stringResource(R.string.history_empty_description),
                         style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.padding(horizontal = 32.dp)
@@ -299,10 +301,10 @@ fun HistoryWithDataPreview() {
             modifier = Modifier.fillMaxSize()
         ) {
             TopAppBar(
-                title = { Text("История запросов") },
+                title = { Text(stringResource(R.string.history_title)) },
                 navigationIcon = {
                     IconButton(onClick = {}) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Назад")
+                        Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 }
             )
@@ -329,10 +331,10 @@ fun HistoryLoadingPreview() {
             modifier = Modifier.fillMaxSize()
         ) {
             TopAppBar(
-                title = { Text("История запросов") },
+                title = { Text(stringResource(R.string.history_title)) },
                 navigationIcon = {
                     IconButton(onClick = {}) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Назад")
+                        Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 }
             )
