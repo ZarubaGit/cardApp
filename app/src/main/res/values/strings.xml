@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">cardApp</string>
+    <string name="bin_search">BIN Поиск</string>
+    <string name="history">История</string>
+    <string name="enter_bin">Введите BIN номер банковской карты</string>
+    <string name="bin_hint">BIN (первые 6-8 цифр карты)</string>
+    <string name="bin_placeholder">457173</string>
+    <string name="bin_supporting_text">Введите первые 6-8 цифр номера карты</string>
+    <string name="search">Поиск</string>
+    <string name="card_info">Информация о карте</string>
+    <string name="scheme">Схема</string>
+    <string name="type">Тип</string>
+    <string name="brand">Бренд</string>
+    <string name="prepaid">Предоплаченная</string>
+    <string name="card_number">Номер карты</string>
+    <string name="length">Длина</string>
+    <string name="luhn_check">Luhn проверка</string>
+    <string name="country">Страна</string>
+    <string name="name">Название</string>
+    <string name="code">Код</string>
+    <string name="currency">Валюта</string>
+    <string name="coordinates">Координаты</string>
+    <string name="bank">Банк</string>
+    <string name="city">Город</string>
+    <string name="website">Сайт</string>
+    <string name="history_title">История запросов</string>
+    <string name="back">Назад</string>
+    <string name="history_empty">История пуста</string>
+    <string name="history_empty_description">Выполните поиск BIN номера для добавления в историю</string>
+    <string name="bin_label">BIN</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="bin_prefix">BIN: %1$s</string>
+    <string name="brand_value">Бренд: %1$s</string>
+    <string name="type_value">Тип: %1$s</string>
+    <string name="phone">Телефон</string>
 </resources>
