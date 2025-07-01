@@ -34,4 +34,5 @@
     <string name="brand_value">Бренд: %1$s</string>
     <string name="type_value">Тип: %1$s</string>
     <string name="phone">Телефон</string>
+    <string name="delete">Удалить</string>
 </resources>

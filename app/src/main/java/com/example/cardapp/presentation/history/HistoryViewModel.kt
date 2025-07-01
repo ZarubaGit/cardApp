@@ -3,6 +3,7 @@ package com.example.cardapp.presentation.history
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cardapp.domain.model.BinInfo
+import com.example.cardapp.domain.usecase.DeleteBinHistoryItemUseCase
 import com.example.cardapp.domain.usecase.GetBinHistoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
-    private val getBinHistoryUseCase: GetBinHistoryUseCase
+    private val getBinHistoryUseCase: GetBinHistoryUseCase,
+    private val deleteBinHistoryItemUseCase: DeleteBinHistoryItemUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HistoryUiState())
@@ -31,6 +33,12 @@ class HistoryViewModel @Inject constructor(
                     isLoading = false
                 )
             }
+        }
+    }
+
+    fun deleteHistoryItem(binInfo: BinInfo) {
+        viewModelScope.launch {
+            deleteBinHistoryItemUseCase(binInfo)
         }
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -92,7 +93,10 @@ fun HistoryScreen(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     items(uiState.binHistory) { binInfo ->
-                        HistoryItem(binInfo = binInfo)
+                        HistoryItem(
+                            binInfo = binInfo,
+                            onDelete = { viewModel.deleteHistoryItem(binInfo) }
+                        )
                     }
                 }
             }
@@ -101,7 +105,10 @@ fun HistoryScreen(
 }
 
 @Composable
-fun HistoryItem(binInfo: BinInfo) {
+fun HistoryItem(
+    binInfo: BinInfo,
+    onDelete: () -> Unit
+) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
@@ -121,18 +128,22 @@ fun HistoryItem(binInfo: BinInfo) {
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
-                
-                binInfo.scheme?.let { scheme ->
-                    Surface(
-                        shape = MaterialTheme.shapes.small,
-                        color = MaterialTheme.colorScheme.primaryContainer
-                    ) {
-                        Text(
-                            text = scheme.uppercase(),
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    binInfo.scheme?.let { scheme ->
+                        Surface(
+                            shape = MaterialTheme.shapes.small,
+                            color = MaterialTheme.colorScheme.primaryContainer
+                        ) {
+                            Text(
+                                text = scheme.uppercase(),
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
+                    }
+                    IconButton(onClick = onDelete) {
+                        Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.delete))
                     }
                 }
             }
@@ -210,7 +221,8 @@ fun HistoryItemPreview() {
                     phone = "+4589893300",
                     city = "Hjørring"
                 )
-            )
+            ),
+            onDelete = {}
         )
     }
 }
@@ -245,7 +257,8 @@ fun HistoryItemMastercardPreview() {
                     phone = "+1-800-935-9935",
                     city = "New York"
                 )
-            )
+            ),
+            onDelete = {}
         )
     }
 }
@@ -315,7 +328,10 @@ fun HistoryWithDataPreview() {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(getSampleBinHistory()) { binInfo ->
-                    HistoryItem(binInfo = binInfo)
+                    HistoryItem(
+                        binInfo = binInfo,
+                        onDelete = {}
+                    )
                 }
             }
         }

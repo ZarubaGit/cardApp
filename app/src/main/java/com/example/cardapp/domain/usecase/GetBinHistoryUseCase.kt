@@ -11,4 +11,12 @@ class GetBinHistoryUseCase @Inject constructor(
     operator fun invoke(): Flow<List<BinInfo>> {
         return repository.getBinHistory()
     }
+}
+
+class DeleteBinHistoryItemUseCase @Inject constructor(
+    private val repository: BinRepository
+) {
+    suspend operator fun invoke(binInfo: BinInfo) {
+        repository.deleteBinInfo(binInfo)
+    }
 } 

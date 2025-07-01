@@ -9,4 +9,5 @@ interface BinRepository {
     suspend fun getCachedBinInfo(bin: String): BinInfo?
     fun getBinHistory(): Flow<List<BinInfo>>
     suspend fun deleteBinFromHistory(bin: String)
+    suspend fun deleteBinInfo(binInfo: BinInfo)
 } 
