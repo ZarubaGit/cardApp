@@ -1,5 +1,6 @@
 package com.example.cardapp.presentation.history
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -27,6 +28,7 @@ import com.example.cardapp.ui.theme.CardAppTheme
 @Composable
 fun HistoryScreen(
     onNavigateBack: () -> Unit,
+    onNavigateToDetail: (String) -> Unit,
     viewModel: HistoryViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -95,7 +97,8 @@ fun HistoryScreen(
                     items(uiState.binHistory) { binInfo ->
                         HistoryItem(
                             binInfo = binInfo,
-                            onDelete = { viewModel.deleteHistoryItem(binInfo) }
+                            onDelete = { viewModel.deleteHistoryItem(binInfo) },
+                            onClick = { onNavigateToDetail(binInfo.bin) }
                         )
                     }
                 }
@@ -107,10 +110,13 @@ fun HistoryScreen(
 @Composable
 fun HistoryItem(
     binInfo: BinInfo,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
+    onClick: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() },
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
@@ -222,7 +228,8 @@ fun HistoryItemPreview() {
                     city = "Hjørring"
                 )
             ),
-            onDelete = {}
+            onDelete = {},
+            onClick = {}
         )
     }
 }
@@ -258,7 +265,8 @@ fun HistoryItemMastercardPreview() {
                     city = "New York"
                 )
             ),
-            onDelete = {}
+            onDelete = {},
+            onClick = {}
         )
     }
 }
@@ -330,7 +338,8 @@ fun HistoryWithDataPreview() {
                 items(getSampleBinHistory()) { binInfo ->
                     HistoryItem(
                         binInfo = binInfo,
-                        onDelete = {}
+                        onDelete = {},
+                        onClick = {}
                     )
                 }
             }

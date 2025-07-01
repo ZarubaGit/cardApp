@@ -125,7 +125,7 @@ fun HistoryScreenDarkPreview() {
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     items(getSampleBinHistoryDark()) { binInfo ->
-                        HistoryItem(binInfo = binInfo, onDelete = {})
+                        HistoryItem(binInfo = binInfo, onDelete = {}, onClick = {})
                     }
                 }
             }
