@@ -55,4 +55,8 @@ class BinRepositoryImpl @Inject constructor(
     override suspend fun deleteBinFromHistory(bin: String) {
         dao.deleteBinInfo(bin)
     }
+
+    override suspend fun deleteBinInfo(binInfo: BinInfo) {
+        dao.deleteBinInfo(binInfo.bin)
+    }
 } 
