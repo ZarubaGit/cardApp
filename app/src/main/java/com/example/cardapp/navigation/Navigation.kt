@@ -9,8 +9,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import androidx.navigation.NavType
 import com.example.cardapp.presentation.history.HistoryScreen
 import com.example.cardapp.presentation.search.BinSearchScreen
+import com.example.cardapp.presentation.detail.BinDetailScreen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -66,8 +69,18 @@ fun Navigation(
             // Сбрасываем флаг при открытии экрана
             isNavigating = false
             HistoryScreen(
-                onNavigateBack = safePopBack
+                onNavigateBack = safePopBack,
+                onNavigateToDetail = { bin -> safeNavigate(Screen.Detail.createRoute(bin)) }
             )
+        }
+
+        composable(
+            route = Screen.Detail.route,
+            arguments = listOf(navArgument("bin") { type = NavType.StringType })
+        ) { backStackEntry ->
+            isNavigating = false
+            val bin = backStackEntry.arguments?.getString("bin") ?: ""
+            BinDetailScreen(bin = bin, onBack = safePopBack)
         }
     }
 }
@@ -75,4 +88,7 @@ fun Navigation(
 sealed class Screen(val route: String) {
     object Search : Screen("search")
     object History : Screen("history")
+    object Detail : Screen("detail/{bin}") {
+        fun createRoute(bin: String) = "detail/$bin"
+    }
 } 
